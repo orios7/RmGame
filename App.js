@@ -1,10 +1,10 @@
-import HomeScreen from "./screens/HomeScreen";
-import MainScreen from "./screens/MainScreen";
-import UserScreen from "./screens/UserScreen";
-import StatsScreen from "./screens/StatsScreen";
-import CharScreen from "./screens/CharScreen";
-import SecondScreen from "./screens/SecondScreen";
-import ThirdScreen from "./screens/ThirdScreen";
+import HomeScreen from "./src/Screens/HomeScreen";
+import MainScreen from "./src/Screens/MainScreen";
+import UserScreen from "./src/Screens/UserScreen";
+import StatsScreen from "./src/Screens/StatsScreen";
+import CharScreen from "./src/Screens/CharScreen";
+import SecondScreen from "./src/Screens/SecondScreen";
+import ThirdScreen from "./src/Screens/ThirdScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";

@@ -11,7 +11,7 @@ export default function StatsScreen({ navigation, route }) {
     <View style={styles.container}>
 
       <ImageBackground 
-      source={require('./stats.png')}
+      source={require('../Assets/stats.png')}
       resizeMode='stretch'
       position='absolute'
       style={{flex : 1}}

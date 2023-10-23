@@ -14,7 +14,7 @@ export default function HomeScreen({ navigation }) {
 
     <View style={styles.container}>
       <ImageBackground 
-      source={require('./RNM3.png')}
+      source={require('../Assets/RNM3.png')}
       resizeMode='stretch'
       position='absolute'
       style={{flex : 1}}

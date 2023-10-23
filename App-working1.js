@@ -1,6 +1,6 @@
-import HomeScreen from "./screens/HomeScreen";
-import SecondScreen from "./screens/SecondScreen";
-import ThirdScreen from "./screens/ThirdScreen";
+import HomeScreen from "./src/Screens/HomeScreen";
+import SecondScreen from "./src/Screens/SecondScreen";
+import ThirdScreen from "./src/Screens/ThirdScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 

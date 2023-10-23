@@ -11,7 +11,7 @@ export default function CharScreen({ navigation, route }) {
     <View style={styles.container}>
 
     <ImageBackground 
-      source={require('./char.png')}
+      source={require('../Assets/char.png')}
       resizeMode='stretch'
       position='absolute'
       style={{flex : 1}}

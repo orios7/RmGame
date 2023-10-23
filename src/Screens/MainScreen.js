@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
 import { StackActions } from '@react-navigation/native';
 
-const image = require("./twofourtwo.jpeg");
+const image = require("../Assets/twofourtwo.jpeg");
 
 export default function MainScreen({ navigation, route }) {
   let language = route.params.language;
@@ -12,7 +12,7 @@ export default function MainScreen({ navigation, route }) {
 
 
       <ImageBackground 
-      source={require('./main.png')}
+      source={require('../Assets/main.png')}
       resizeMode='cover'
       position='absolute'
       style={{flex : 1}}

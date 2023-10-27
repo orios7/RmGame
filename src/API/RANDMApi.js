@@ -1,63 +1,55 @@
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
-// Will return an Array with all characters in ID Order.
+const getAllDataFromRAMApiEndpoint = async (endpoint) => {
+    let allData = [];
+    let nextUrl = `${BASE_URL}/${endpoint}/?page=1`
+
+    while (nextUrl) {
+        const response = await fetch(nextUrl);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            allData = allData.concat(data.results);
+        }
+
+        nextUrl = data.info.next;
+    }
+
+    return allData;
+}
+
+const getDataFromERAMApiEndpoint = async (endpoint, id) => {
+    let dataToReturn;
+    let url = `${BASE_URL}/${endpoint}/${id}`;
+
+    let data = await fetch(url);
+    if (data.results && data.results.length > 0) {
+         dataToReturn = data.results;
+    }
+
+    return dataToReturn;
+}
+
 export const getAllCharacters = async () => {
-    let allCharacters = [];
-    let nextUrl = `${BASE_URL}/character/?page=1`
+    return getAllDataFromRAMApiEndpoint("character");
+}
 
-    while (nextUrl) {
-        const response = await fetch(nextUrl);
-        const data = await response.json();
-
-        if (data.results && data.results.length > 0) {
-            allCharacters = allCharacters.concat(data.results);
-        }
-
-        nextUrl = data.info.next;
-    }
-    return allCharacters;
-};
-
-// returns a single character by ID.
-export const getSpecificCharacter = async (characterId) => {
-   let characterToReturn;
-   let characterURL = `${BASE_URL}/character/${characterId}`
-
-   let data = await fetch(characterURL);
-    if (data.results && data.results.length > 0) {
-        characterToReturn = data.results;
-    }
-
-    return characterToReturn;
-};
-
-// returns all locations
 export const getAllLocations = async () => {
-    let allLocations = [];
-    let nextUrl = `${BASE_URL}/location/?page=1`
+    return getAllDataFromRAMApiEndpoint("locations");
+}
 
-    while (nextUrl) {
-        const response = await fetch(nextUrl);
-        const data = await response.json();
+export const getAllEpisodes = async () => {
+    return getAllDataFromRAMApiEndpoint("episode");
+}
 
-        if (data.results && data.results.length > 0) {
-            allLocations = allLocations.concat(data.results);
-        }
+export const getCharacter = async (id) => {
+    return getDataFromERAMApiEndpoint('character', id);
+}
 
-        nextUrl = data.info.next;
-    }
-    return allLocations;
-};
+export const getLocation = async (id) => {
+    return getDataFromERAMApiEndpoint('location', id);
+}
 
-// returns a single location by ID
-export const getSpecificLocation = async (locationId) => {
-    let locationToReturn;
-    let locationURL = `${BASE_URL}/location/${locationId}`
-
-    let data = await fetch(locationURL);
-    if (data.results && data.results.length > 0) {
-        locationToReturn = data.results;
-    }
-
-    return locationToReturn;
-};
+export const getEpisode = async (id) => {
+    return getDataFromERAMApiEndpoint('episode', id);
+}

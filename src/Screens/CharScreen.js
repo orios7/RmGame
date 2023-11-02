@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
 import { StackActions } from '@react-navigation/native';
+import { Character } from '../Components/Character'
+import { CharacterTestData} from "../../test/TestCharacters";
 
 //const image = require("./one.jpeg");
 
@@ -9,37 +11,9 @@ export default function CharScreen({ navigation, route }) {
   let greeting = language === "f" ? "B" : "H";
   return (
     <View style={styles.container}>
-
-    <ImageBackground 
-      source={require('../Assets/char.png')}
-      resizeMode='stretch'
-      position='absolute'
-      style={{flex : 1}}
-      >
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
+      <Character Data={CharacterTestData}></Character>
 
 
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} > </Text>
-      <Text style={styles.text} >   Name: "Rick Sanchez"</Text>
-      <Text style={styles.text} >   Status: "Alive" </Text>
-      <Text style={styles.text} >   Species: "Human" </Text>
-      <Text style={styles.text} >   Gender: "Male" </Text>
-      <Text style={styles.text} > </Text>
-
-
-
-      </ImageBackground>
 
     </View>
   );

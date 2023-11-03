@@ -8,10 +8,14 @@ import ThirdScreen from "./src/Screens/ThirdScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useFonts } from "expo-font";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'GetSchwifty': require('./src/Assets/fonts/get_schwifty.ttf'),
+  });
   return (
     <NavigationContainer>
       <Stack.Navigator>

@@ -1,46 +1,79 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, ImageBackground } from 'react-native';
+import { useState, useEffect } from "react";
+import {StyleSheet, Text, View, Button, ImageBackground, FlatList, Modal} from 'react-native';
 import { StackActions } from '@react-navigation/native';
 import { Character } from '../Components/Character'
-import { CharacterTestData} from "../../test/TestCharacters";
+import { CharacterTestData } from "../../test/TestCharacters";
+import { getAllCharacters } from "../API/RANDMApi";
 
 //const image = require("./one.jpeg");
 
 export default function CharScreen({ navigation, route }) {
+  const [data, setData] = useState([]);
+  const [characterData, setCharacterData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const getSelectedCharacter = (characterId) => {
+      return characterData.find((Character) => Character.id === characterId)
+  }
+
+  useEffect(() => {
+    const fetchNames = async () => {
+      try {
+      const fetchedData = await getAllCharacters();
+      const extractedNames = fetchedData.map((item) => ({id: item.id, name: item.name}));
+      setCharacterData(fetchedData);
+      setData(extractedNames);
+    } catch (error) {
+        // TODO: Put in the Error Page
+        console.log(`Error: ${error}`)
+      }
+    };
+    fetchNames();
+  }, []);
+
+
   let language = route.params.language;
   let greeting = language === "f" ? "B" : "H";
   return (
     <View style={styles.container}>
-      <Character Data={CharacterTestData}></Character>
-
-
-
+      <FlatList
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+              <Text style={styles.listItem}
+              onPress={() => {
+                setSelectedItem(item);
+                setModalVisible(true);
+              }}>
+                {item.name}
+              </Text>
+            )}
+          initialNumToRender={50}
+          windowSize={10}
+          maxToRenderPerBatch={50}
+          />
+        <Modal
+            animationType="slide"
+            transparent={false}
+            visible={isModalVisible}>
+            <View>
+                {isModalVisible && (<Character Data={getSelectedCharacter(selectedItem.id)}/>)}
+                <Button title="Close" onPress={() => setModalVisible(false)} />
+            </View>
+        </Modal>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-
+      flex: 1,
+      backgroundColor: '#fff',
   },
-  image: {
-    flex: 1,
-    width: 300,
-    height: 300,
-    justifyContent: 'center',
-    //borderColor: 'midnightblue',
-    //borderWidth: '2'
-  },
-  text: {
-    color: 'midnightblue',
-    //alignSelf: 'left',
-    //borderColor: 'midnightblue',
-    alignSelf: 'center',
-    fontSize: 20,
-  },
-
-
-
+    listItem: {
+      padding: 5,
+        fontWeight: "bold",
+        fontSize: 20,
+    }
 });

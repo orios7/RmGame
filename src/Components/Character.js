@@ -1,11 +1,10 @@
 import {StyleSheet, View, Text, Image} from 'react-native';
-// import { useFonts } from 'expo-font;'
-
 export const Character = ({Data}) => {{
 
     return(
         <View style={styles.View}>
             <Image source={{uri: Data.image}} style={styles.characterImage} />
+
             <Text style={styles.name}>{Data.name}</Text>
             <Text style={styles.species}>Species: {Data.species}</Text>
             <Text style={styles.gender}>Gender: {Data.gender}</Text>
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontFamily: 'GetSchwifty',
+        color: '#88e23b',
         fontSize: 50,
         alignSelf: "center",
 

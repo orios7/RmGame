@@ -1,18 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from "react";
-import {StyleSheet, Text, View, Button, ImageBackground, FlatList, Modal} from 'react-native';
-import { StackActions } from '@react-navigation/native';
+import { StyleSheet, Text, View, Button, ImageBackground, FlatList, Modal } from 'react-native';
 import { Character } from '../Components/Character'
-import { CharacterTestData } from "../../test/TestCharacters";
 import { getAllCharacters } from "../API/RANDMApi";
-
-//const image = require("./one.jpeg");
+import {ErrorSplash} from "../Components/ErrorSplash";
 
 export default function CharScreen({ navigation, route }) {
   const [data, setData] = useState([]);
   const [characterData, setCharacterData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [error, setError] = useState(null);
+  const [hasError, setHasError] = useState(false)
   const getSelectedCharacter = (characterId) => {
       return characterData.find((Character) => Character.id === characterId)
   }
@@ -20,13 +18,13 @@ export default function CharScreen({ navigation, route }) {
   useEffect(() => {
     const fetchNames = async () => {
       try {
-      const fetchedData = await getAllCharacters();
-      const extractedNames = fetchedData.map((item) => ({id: item.id, name: item.name}));
-      setCharacterData(fetchedData);
-      setData(extractedNames);
+        const fetchedData = await getAllCharacters();
+        const extractedNames = fetchedData.map((item) => ({id: item.id, name: item.name}));
+        setCharacterData(fetchedData);
+        setData(extractedNames);
     } catch (error) {
-        // TODO: Put in the Error Page
-        console.log(`Error: ${error}`)
+        setError(error.message);
+        setHasError(true);
       }
     };
     fetchNames();
@@ -35,8 +33,10 @@ export default function CharScreen({ navigation, route }) {
 
   let language = route.params.language;
   let greeting = language === "f" ? "B" : "H";
+
   return (
     <View style={styles.container}>
+        {hasError ? (<ErrorSplash errorMessage={error} />) : (
       <FlatList
           data={data}
           keyExtractor={(item) => item.id.toString()}
@@ -52,7 +52,7 @@ export default function CharScreen({ navigation, route }) {
           initialNumToRender={50}
           windowSize={10}
           maxToRenderPerBatch={50}
-          />
+          />)}
         <Modal
             animationType="slide"
             transparent={false}

@@ -4,30 +4,45 @@ const getAllDataFromRAMApiEndpoint = async (endpoint) => {
     let allData = [];
     let nextUrl = `${BASE_URL}/${endpoint}/?page=1`
 
-    while (nextUrl) {
-        const response = await fetch(nextUrl);
-        const data = await response.json();
+    try {
+        while (nextUrl) {
+            const response = await fetch(nextUrl);
+            if(!response.ok) {
+                throw new Error(`API Request failed with status: ${response.status}`)
+            }
+            const data = await response.json();
 
-        if (data.results && data.results.length > 0) {
-            allData = allData.concat(data.results);
+            if (data.results && data.results.length > 0) {
+                allData = allData.concat(data.results);
+            }
+
+            nextUrl = data.info.next;
         }
 
-        nextUrl = data.info.next;
-    }
+        return allData;
 
-    return allData;
+    } catch (error) {
+        throw new Error(`Error fetching data: ${error.message}`)
+    }
 }
 
 const getDataFromERAMApiEndpoint = async (endpoint, id) => {
     let dataToReturn;
     let url = `${BASE_URL}/${endpoint}/${id}`;
 
-    let data = await fetch(url);
-    if (data.results && data.results.length > 0) {
-         dataToReturn = data.results;
-    }
+    try {
+        let response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`)
+        }
+        if (response.results && response.results.length > 0) {
+            dataToReturn = response.results;
+        }
 
-    return dataToReturn;
+        return dataToReturn;
+    } catch (error) {
+        throw new Error(`Error fetching data: ${error.message}`);
+    }
 }
 
 export const getAllCharacters = async () => {

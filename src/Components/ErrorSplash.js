@@ -1,4 +1,4 @@
-import {Image, Text, View} from "react-native";
+import { StyleSheet, Image, Text, View } from "react-native";
 
 const errorImages = [
     '../assets/error1.png',
@@ -12,7 +12,7 @@ const randomErrorImage = errorImages[Math.floor((Math.random()) * errorImages.le
 export const ErrorSplash = ({ errorMessage }) => {
     return (
         <View>
-            <Image source={{uri: randomErrorImage }} style={styles.errorImage} />
+            <Image source={{uri: randomErrorImage }} style={styles.errorImages} />
             <Text style={styles.errorText}>{errorMessage}</Text>
         </View>
     )

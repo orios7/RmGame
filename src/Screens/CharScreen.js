@@ -1,18 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from "react";
 import {StyleSheet, Text, View, Button, ImageBackground, FlatList, Modal} from 'react-native';
-import { StackActions } from '@react-navigation/native';
 import { Character } from '../Components/Character'
-import { CharacterTestData } from "../../test/TestCharacters";
 import { getAllCharacters } from "../API/RANDMApi";
-
-//const image = require("./one.jpeg");
 
 export default function CharScreen({ navigation, route }) {
   const [data, setData] = useState([]);
   const [characterData, setCharacterData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
+  const [error, setError] = useState(null);
+  const [hasError, setHasError] = useState(false)
   const getSelectedCharacter = (characterId) => {
       return characterData.find((Character) => Character.id === characterId)
   }

@@ -1,5 +1,4 @@
-// const BASE_URL = 'https://rickandmortyapi.com/api'
-const BASE_URL = 'https://httpstat.us/401'
+const BASE_URL = 'https://rickandmortyapi.com/api'
 
 const getAllDataFromRAMApiEndpoint = async (endpoint) => {
     let allData = [];

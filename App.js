@@ -9,6 +9,7 @@ import ThirdScreen from "./src/Screens/ThirdScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useFonts } from "expo-font";
+import {LoginScreen} from "./src/Screens/LoginScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen 
         name="Home"
-        component={HomeScreen}
+        component={LoginScreen}
         options={{title: "Rick and Morty Trivia Game"}}
         />
         <Stack.Screen 

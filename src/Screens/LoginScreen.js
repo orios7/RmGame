@@ -1,16 +1,14 @@
-import {StatusBar} from 'expo-status-bar';
-import { Formik, Field, ErrorMessage } from "formik";
-import * as Yup from 'yup';
 import {StyleSheet, Button, View, ImageBackground, Text, TextInput, Image} from 'react-native';
-
 import React, {useState} from 'react';
+import RAMBackground from '../Assets/RNM.png'
 import {LoginForm} from "../Components/LoginForm"; // Use to exit: BackHandler.exitApp();
 
 
-export const LoginScreen = (navigation) => {
+export const LoginScreen = ({navigation}) => {
     const handleLogin = (values) => {
         // Whenever we get the login stuff here we go.
-        console.log("Form Values were: ", values)
+        console.log("Form Values were: ", values);
+        navigation.navigate("Main", {language: "e"});
     }
 
     const [name, setName1] = useState('');
@@ -19,17 +17,10 @@ export const LoginScreen = (navigation) => {
     return (
 
 
-    <ImageBackground source={require('../Assets/RNM3.png')} style={styles.backgroundImage}>
-        <View style={styles.container}>
-        <LoginForm onSubmit={handleLogin} />
-            <Button
-                style={styles.button}
-                title="Login"
+        <ImageBackground source={RAMBackground} style={styles.container}>
+                <LoginForm onSubmit={handleLogin}/>
+        </ImageBackground>
 
-                onPress={() => navigation.navigate("Main", {language: "e"})}
-            />
-        </View>
-    </ImageBackground>
     );
 }
 
@@ -37,11 +28,14 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#FFFFFF',
+        alignItems: 'center',
+        justifyContent: 'center'
+        // backgroundColor: '#FFFFFF',
 
     },
     backgroundImage: {
-        flex:1,
+        // resizeMode: "cover",
+        // position:'absolute'
     },
 
     footerContainer: {

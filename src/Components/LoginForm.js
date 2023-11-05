@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import {Button, TextInput, View} from "react-native";
+import {Button, TextInput, View, Text} from "react-native";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()

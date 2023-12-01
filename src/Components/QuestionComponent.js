@@ -25,19 +25,19 @@ const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, h
     }, [isCorrectAnswer]);
 
     return (
-        <View>
+        <View style={styles.container}>
             <Image source={{ uri: imageUri }} style={styles.imageStyle} />
-            <Text style={styles.questionTextStyle}>{question}</Text>
 
             {answerOptions.map((option, index) => (
                 <Button
                     key={index}
                     title={option}
                     onPress={() => handleButtonSelection(option)}
-                    style={selectedAnswer === option && isCorrectAnswer ?
-                        styles.correctButtonStyle
-                        : selectedAnswer === option
-                        && !isCorrectAnswer ? styles.incorrectButtonStyle : styles.buttonStyle}
+                    style={selectedAnswer === option && isCorrectAnswer
+                        ? styles.correctButtonStyle
+                        : selectedAnswer === option && !isCorrectAnswer
+                            ? styles.incorrectButtonStyle
+                            : styles.buttonStyle}
                 />
             ))}
         </View>
@@ -48,9 +48,12 @@ export default QuestionComponent;
 
 
 const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+    },
     imageStyle: {
-        width: '100%',
-        height: 200,
+        flex: 2,
         resizeMode: 'cover',
     },
     questionTextStyle: {
@@ -59,12 +62,19 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     buttonStyle: {
-
+        // flex: 2,
+        backgroundColor: '#fff',
+        borderColor: '#000',
+        borderWidth: 1,
+        padding: 10,
+        margin: 10,
     },
     correctButtonStyle: {
-
+        backgroundColor: '#00ff00',
+        borderColor: '#00ff00',
     },
     incorrectButtonStyle: {
-
-    }
+        backgroundColor: '#ff0000',
+        borderColor: '#ff0000',
+    },
 });

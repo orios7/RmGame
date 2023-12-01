@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Button } from 'react-native';
+import { View, Image, Text, Button, StyleSheet } from 'react-native';
 import {getTriviaQuestion} from "../API/RANDMApi";
 import QuestionComponent from '../Components/QuestionComponent';
 
@@ -39,16 +39,53 @@ const QuizScreen = () => {
     }, []);
 
     return (
-        <View>
+        <View style={styles.container}>
+            <Text style={styles.scoreStyle}>Current Score: {score}</Text>
             <QuestionComponent
+                style={styles.questionStyle}
                 imageUri={correctAnswer.image}
                 answerOptions={questions}
                 correctAnswer={correctAnswer.name}
                 handleAnswerSelection={handleAnswerSelection}
             />
-            <Text>Current Score: {score}</Text>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column'
+    },
+    scoreStyle: {
+        flex: 0,
+        textAlign: 'center',
+
+
+        // Shadowing
+        shadowColor: '#000',
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+
+        // Border
+        borderWidth: 1,
+        borderColor: '#ccc',
+
+        // Font
+        fontSize: 24,
+        fontWeight: 'bold'
+
+
+    },
+    questionStyle: {
+        flex: 4
+    },
+
+
+})
 
 export default QuizScreen

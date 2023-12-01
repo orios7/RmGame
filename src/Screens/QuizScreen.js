@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Button, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {getTriviaQuestion} from "../API/RANDMApi";
 import QuestionComponent from '../Components/QuestionComponent';
 
@@ -17,7 +17,6 @@ const QuizScreen = () => {
         setQuestions(fourCharacters.map(character => character.name))
         setCorrectAnswer(selectedQuestion)
     };
-
 
 
     // set score but need to change how it lets people know / store their score.
@@ -48,16 +47,6 @@ const QuizScreen = () => {
     useEffect(() => {
         fetchQuestions();
     }, []);
-    //
-    // useEffect(() => {
-    //     if (isCorrectAnswer === true) {
-    //         const timeoutId = setTimeout(() => {
-    //             setIsCorrectAnswer(false);
-    //         }, 5000); // Set delay to 5 seconds
-    //
-    //         return () => clearTimeout(timeoutId); // Clear timeout on unmount
-    //     }
-    // }, [isCorrectAnswer]);
 
     return (
         <View style={styles.container}>
@@ -86,8 +75,8 @@ const styles = StyleSheet.create({
         // Shadowing
         shadowColor: '#000',
         shadowOffset: {
-        width: 0,
-        height: 2,
+            width: 0,
+            height: 2,
         },
         shadowOpacity: 0.2,
         shadowRadius: 4,

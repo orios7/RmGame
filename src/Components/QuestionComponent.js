@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Button, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import {View, Image, Button, StyleSheet} from 'react-native';
 
-const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, handleAnswerSelection, isCorrectAnswer }) => {
+const QuestionComponent = ({
+
+                               imageUri,
+                               answerOptions,
+                               correctAnswer,
+                               handleAnswerSelection,
+
+                           }) => {
     const [selectedAnswer, setSelectedAnswer] = useState('');
 
     const handleButtonSelection = (option) => {
@@ -12,7 +19,7 @@ const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, h
 
     return (
         <View style={styles.container}>
-            <Image source={{ uri: imageUri }} style={styles.imageStyle} />
+            <Image source={{uri: imageUri}} style={styles.imageStyle}/>
 
             {answerOptions.map((option, index) => (
                 <Button
@@ -39,8 +46,8 @@ export default QuestionComponent;
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      flexDirection: "column",
+        flex: 1,
+        flexDirection: "column",
     },
     imageStyle: {
         flex: 2,

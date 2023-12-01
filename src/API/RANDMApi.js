@@ -1,5 +1,24 @@
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`API request failed with status ${response.status}`);
+        }
+
+        let dataToReturn = [];
+        if (response.results && response.results.length > 0) {
+            dataToReturn = response.results;
+        }
+
+        return dataToReturn;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
 const getAllDataFromRAMApiEndpoint = async (endpoint) => {
     let allData = [];
     let nextUrl = `${BASE_URL}/${endpoint}/?page=1`
@@ -30,20 +49,22 @@ const getDataFromERAMApiEndpoint = async (endpoint, id) => {
     let dataToReturn;
     let url = `${BASE_URL}/${endpoint}/${id}`;
 
-    try {
-        let response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`API request failed with status ${response.status}`)
-        }
-        if (response.results && response.results.length > 0) {
-            dataToReturn = response.results;
-        }
+    return await fetchData(url);
 
-        return dataToReturn;
-    } catch (error) {
-        throw new Error(`Error fetching data: ${error.message}`);
-    }
 }
+
+const getTriviaDataFromRAMApi = async () => {
+    let randomNumbers = [];
+    for (let i = 0; i < 4; i++) {
+        let randomNumber = Math.floor(Math.random() * 800) + 1;
+        randomNumbers.push(randomNumber);
+    }
+    const randomNumbersString = randomNumbers.join(', ');
+
+    let url = `${BASE_URL}/character/${randomNumbersString}`;
+    return await fetchData(url);
+}
+
 
 export const getAllCharacters = async () => {
     return getAllDataFromRAMApiEndpoint("character");
@@ -67,4 +88,8 @@ export const getLocation = async (id) => {
 
 export const getEpisode = async (id) => {
     return getDataFromERAMApiEndpoint('episode', id);
+}
+
+export const getTriviaQuestion = async () => {
+    return getTriviaDataFromRAMApi()
 }

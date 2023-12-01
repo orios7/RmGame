@@ -30,12 +30,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-        // backgroundColor: '#FFFFFF',
 
     },
     backgroundImage: {
-        // resizeMode: "cover",
-        // position:'absolute'
+
     },
 
     footerContainer: {
@@ -47,7 +45,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: 'blue',
         alignSelf: 'center',
-        //borderWidth: 2,
         borderColor: '#7fffd4',
         margin: 10
     },
@@ -66,8 +63,6 @@ const styles = StyleSheet.create({
     button: {
         flex: 1,
         borderWidth: 2,
-        //Color: '#7fffd4',
-        //borderColor: '#7fffd4',
         padding: 2
     },
 

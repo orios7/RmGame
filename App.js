@@ -3,6 +3,7 @@ import MainScreen from "./src/Screens/MainScreen";
 import UserScreen from "./src/Screens/UserScreen";
 import StatsScreen from "./src/Screens/StatsScreen";
 import CharScreen from "./src/Screens/CharScreen";
+import QuizScreen from "./src/Screens/QuizScreen"
 import SecondScreen from "./src/Screens/SecondScreen";
 import ThirdScreen from "./src/Screens/ThirdScreen";
 
@@ -45,10 +46,12 @@ export default function App() {
           component={CharScreen}
           options={{title: "Mort-y-Dex Character Encyclopedia"}}
         />
-        <Stack.Screen 
-          name="Second"
-          component={SecondScreen}
+        <Stack.Screen
+            name="Trivia"
+            component={QuizScreen}
+            options={{title: "Rick and Morty Quiz"}}
         />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

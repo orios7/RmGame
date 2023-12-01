@@ -52,7 +52,12 @@ export default function MainScreen({ navigation, route }) {
       <Button 
         style = {styles.button}
         title="log Out"
-        onPress={() => navigation.navigate("Second", { language: "french" })} // Enter Exit code
+        onPress={() => navigation.navigate("Second", { language: "french" })}
+      />
+      <Button
+          style = {styles.button}
+          title="Trivia"
+          onPress={() => navigation.navigate("Trivia", { language: "e" })}
       />
 
       </ImageBackground>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, Button } from 'react-native';
+import { View, Image, Text, Button, StyleSheet } from 'react-native';
 
 const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, handleAnswerSelection }) => {
     const [selectedAnswer, setSelectedAnswer] = useState('');
@@ -26,8 +26,8 @@ const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, h
 
     return (
         <View>
-            <Image source={{ uri: imageUri }} style={imageStyle} />
-            <Text style={questionTextStyle}>{question}</Text>
+            <Image source={{ uri: imageUri }} style={styles.imageStyle} />
+            <Text style={styles.questionTextStyle}>{question}</Text>
 
             {answerOptions.map((option, index) => (
                 <Button
@@ -47,7 +47,7 @@ const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, h
 export default QuestionComponent;
 
 
-const styles = {
+const styles = StyleSheet.create({
     imageStyle: {
         width: '100%',
         height: 200,
@@ -58,10 +58,13 @@ const styles = {
         fontWeight: 'bold',
         margin: 10,
     },
+    buttonStyle: {
+
+    },
     correctButtonStyle: {
 
     },
     incorrectButtonStyle: {
 
     }
-};
+});

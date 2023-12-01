@@ -7,9 +7,12 @@ async function fetchData(url) {
             throw new Error(`API request failed with status ${response.status}`);
         }
 
-        let dataToReturn = [];
-        if (response.results && response.results.length > 0) {
-            dataToReturn = response.results;
+        let data = await response.json();
+        let dataToReturn = []
+        if (Array.isArray(data)) {
+            dataToReturn = data;
+        } else if (data && typeof data == 'object') {
+            dataToReturn = [data]
         }
 
         return dataToReturn;
@@ -45,8 +48,7 @@ const getAllDataFromRAMApiEndpoint = async (endpoint) => {
     }
 }
 
-const getDataFromERAMApiEndpoint = async (endpoint, id) => {
-    let dataToReturn;
+const getDataFromRAMApiEndpoint = async (endpoint, id) => {
     let url = `${BASE_URL}/${endpoint}/${id}`;
 
     return await fetchData(url);
@@ -59,10 +61,11 @@ const getTriviaDataFromRAMApi = async () => {
         let randomNumber = Math.floor(Math.random() * 800) + 1;
         randomNumbers.push(randomNumber);
     }
-    const randomNumbersString = randomNumbers.join(', ');
+    const randomNumbersString = randomNumbers.join(',');
 
     let url = `${BASE_URL}/character/${randomNumbersString}`;
-    return await fetchData(url);
+    let data = await fetchData(url)
+    return data
 }
 
 
@@ -79,17 +82,17 @@ export const getAllEpisodes = async () => {
 }
 
 export const getCharacter = async (id) => {
-    return getDataFromERAMApiEndpoint('character', id);
+    return getDataFromRAMApiEndpoint('character', id);
 }
 
 export const getLocation = async (id) => {
-    return getDataFromERAMApiEndpoint('location', id);
+    return getDataFromRAMApiEndpoint('location', id);
 }
 
 export const getEpisode = async (id) => {
-    return getDataFromERAMApiEndpoint('episode', id);
+    return getDataFromRAMApiEndpoint('episode', id);
 }
 
 export const getTriviaQuestion = async () => {
-    return getTriviaDataFromRAMApi()
+    return await getTriviaDataFromRAMApi()
 }

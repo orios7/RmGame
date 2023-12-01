@@ -50,3 +50,5 @@ const QuizScreen = () => {
         </View>
     );
 };
+
+export default QuizScreen

@@ -5,32 +5,35 @@ import QuestionComponent from '../Components/QuestionComponent';
 
 const QuizScreen = () => {
     const [questions, setQuestions] = useState([]);
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [correctAnswer, setCorrectAnswer] = useState([])
+    const [round, setRound] = useState(1);
     const [score, setScore] = useState(0);
 
     const fetchQuestions = async () => {
+        let randomChoice = Math.floor(Math.random() * 4)
         let fourCharacters = await getTriviaQuestion();
-
-
-
-        setQuestions(data);
+        let selectedQuestion = fourCharacters[randomChoice]
+        setQuestions(fourCharacters.map(character => character.name))
+        setCorrectAnswer(selectedQuestion)
     };
 
     // set score but need to change how it lets people know / store their score.
     const handleAnswerSelection = (option) => {
-        if (option === questions[currentQuestionIndex].correctAnswer) {
+        if (option === correctAnswer.name) {
             setScore(score + 1);
+        } else {
+            setScore(score - 1)
         }
 
-        if (currentQuestionIndex < questions.length - 1) {
-            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        if (round < 10 ) {
+            setRound(round + 1)
+            fetchQuestions();
         } else {
             // Quiz is complete
             alert(`You scored ${score} out of 10!`);
         }
     };
 
-    // Initialize quiz data
     useEffect(() => {
         fetchQuestions();
     }, []);
@@ -38,10 +41,9 @@ const QuizScreen = () => {
     return (
         <View>
             <QuestionComponent
-                question={questions[currentQuestionIndex].question}
-                imageUri={questions[currentQuestionIndex].imageUri}
-                answerOptions={questions[currentQuestionIndex].answerOptions}
-                correctAnswer={questions[currentQuestionIndex].correctAnswer}
+                imageUri={correctAnswer.image}
+                answerOptions={questions}
+                correctAnswer={correctAnswer.name}
                 handleAnswerSelection={handleAnswerSelection}
             />
             <Text>Current Score: {score}</Text>

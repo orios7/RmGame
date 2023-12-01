@@ -2,7 +2,6 @@ import {StyleSheet, Text, View, Button, ImageBackground} from 'react-native';
 
 
 export default function MainScreen({navigation, route}) {
-    let language = route.params.language;
     return (
         <View style={styles.container}>
 

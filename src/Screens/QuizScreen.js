@@ -8,6 +8,7 @@ const QuizScreen = () => {
     const [correctAnswer, setCorrectAnswer] = useState([])
     const [round, setRound] = useState(1);
     const [score, setScore] = useState(0);
+    const [isCorrectAnswer, setIsCorrectAnswer] = useState(null)
 
     const fetchQuestions = async () => {
         let randomChoice = Math.floor(Math.random() * 4)
@@ -17,26 +18,46 @@ const QuizScreen = () => {
         setCorrectAnswer(selectedQuestion)
     };
 
+
+
     // set score but need to change how it lets people know / store their score.
     const handleAnswerSelection = (option) => {
         if (option === correctAnswer.name) {
             setScore(score + 1);
+            setIsCorrectAnswer(true);
         } else {
-            setScore(score - 1)
+            setScore(score - 1);
+            setIsCorrectAnswer(false);
         }
 
-        if (round < 10 ) {
-            setRound(round + 1)
+        if (round < 10) {
+            setRound(round + 1);
             fetchQuestions();
         } else {
             // Quiz is complete
             alert(`You scored ${score} out of 10!`);
         }
+
+        const timeoutId = setTimeout(() => {
+            setIsCorrectAnswer(false);
+        }, 5000); // Set delay to 5 seconds
+
+        return () => clearTimeout(timeoutId); // Clear timeout on unmount
     };
 
     useEffect(() => {
         fetchQuestions();
     }, []);
+    //
+    // useEffect(() => {
+    //     if (isCorrectAnswer === true) {
+    //         const timeoutId = setTimeout(() => {
+    //             setIsCorrectAnswer(false);
+    //         }, 5000); // Set delay to 5 seconds
+    //
+    //         return () => clearTimeout(timeoutId); // Clear timeout on unmount
+    //     }
+    // }, [isCorrectAnswer]);
 
     return (
         <View style={styles.container}>
@@ -46,7 +67,7 @@ const QuizScreen = () => {
                 imageUri={correctAnswer.image}
                 answerOptions={questions}
                 correctAnswer={correctAnswer.name}
-                handleAnswerSelection={handleAnswerSelection}
+                handleAnswerSelection={(option) => handleAnswerSelection(option)}
             />
         </View>
     );

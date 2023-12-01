@@ -1,28 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, Text, Button, StyleSheet } from 'react-native';
 
-const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, handleAnswerSelection }) => {
+const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, handleAnswerSelection, isCorrectAnswer }) => {
     const [selectedAnswer, setSelectedAnswer] = useState('');
-    const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
 
     const handleButtonSelection = (option) => {
-        setSelectedAnswer(option);
+        setSelectedAnswer(option)
         handleAnswerSelection(option);
-
-        if (option === correctAnswer) {
-            setIsCorrectAnswer(true);
-        } else {
-            setIsCorrectAnswer(false);
-        }
     };
 
-    useEffect(() => {
-        if (isCorrectAnswer) {
-            const timeoutId = setTimeout(() => {
-            }, 1000);
-            return () => clearTimeout(timeoutId);
-        }
-    }, [isCorrectAnswer]);
 
     return (
         <View style={styles.container}>
@@ -33,11 +19,15 @@ const QuestionComponent = ({ question, imageUri, answerOptions, correctAnswer, h
                     key={index}
                     title={option}
                     onPress={() => handleButtonSelection(option)}
-                    style={selectedAnswer === option && isCorrectAnswer
-                        ? styles.correctButtonStyle
-                        : selectedAnswer === option && !isCorrectAnswer
-                            ? styles.incorrectButtonStyle
-                            : styles.buttonStyle}
+                    style={
+                        selectedAnswer === option && correctAnswer
+                            ? styles.correctButtonStyle
+                            : selectedAnswer === option && !correctAnswer
+                                ? styles.incorrectButtonStyle
+                                : !selectedAnswer
+                                    ? styles.buttonStyle
+                                    : styles.buttonStyle
+                    }
                 />
             ))}
         </View>

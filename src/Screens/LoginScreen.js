@@ -18,7 +18,7 @@ export const LoginScreen = ({navigation}) => {
 
 
         <ImageBackground source={RAMBackground} style={styles.container}>
-                <LoginForm onSubmit={handleLogin}/>
+            <LoginForm onSubmit={handleLogin}/>
         </ImageBackground>
 
     );
@@ -32,15 +32,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
 
     },
-    backgroundImage: {
-
-    },
+    backgroundImage: {},
 
     footerContainer: {
         flex: 1 / 1,
         alignItems: 'center',
     },
-
     textinput: {
         fontSize: 20,
         color: 'blue',
@@ -48,24 +45,20 @@ const styles = StyleSheet.create({
         borderColor: '#7fffd4',
         margin: 10
     },
-
     text: {
         fontSize: 10,
         color: '#7fffd4'
     },
-
     text2: {
         fontSize: 20,
         color: '#7fffd4'
     },
-
 
     button: {
         flex: 1,
         borderWidth: 2,
         padding: 2
     },
-
     image: {
         flex: .5,
         justifyContent: 'center',

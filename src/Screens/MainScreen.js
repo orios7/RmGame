@@ -11,41 +11,55 @@ export default function MainScreen({navigation, route}) {
                 style={{ flex: 1 }}
             >
                 <View style={styles.center}>
-                    <Button
-                        style={styles.button}
-                        title="Profile"
-                        onPress={() => navigation.navigate('User', { language: 'e' })}
-                    />
-                    <Button
-                        style={styles.button}
-                        title="Top 10"
-                        onPress={() =>
-                            navigation.navigate('Stats', { language: 'french' })
-                        }
-                    />
-                    <Button
-                        style={styles.button}
-                        title="Trivia"
-                        onPress={() =>
-                            navigation.navigate('Trivia', { language: 'e' })
-                        }
-                    />
-                    <Button
-                        style={styles.button}
-                        title="Character List"
-                        onPress={() =>
-                            navigation.navigate('Characters', {
-                                language: 'french',
-                            })
-                        }
-                    />
-                    <Button
-                        style={styles.button}
-                        title="Log Out"
-                        onPress={() =>
-                            navigation.navigate('Second', { language: 'french' })
-                        }
-                    />
+                    <View style={styles.buttonWrapper}>
+                        <Button
+                            style={styles.button}
+                            title="Profile"
+                            onPress={() => navigation.navigate('User', { language: 'e' })}
+                        />
+                    </View>
+
+                    <View style={styles.buttonWrapper}>
+                        <Button
+                            style={styles.button}
+                            title="Top 10"
+                            onPress={() =>
+                                navigation.navigate('Stats', { language: 'french' })
+                            }
+                        />
+                    </View>
+
+                    <View style={styles.buttonWrapper}>
+                        <Button
+                            style={styles.button}
+                            title="Trivia"
+                            onPress={() =>
+                                navigation.navigate('Trivia', { language: 'e' })
+                            }
+                        />
+                    </View>
+
+                    <View style={styles.buttonWrapper}>
+                        <Button
+                            style={styles.button}
+                            title="Character List"
+                            onPress={() =>
+                                navigation.navigate('Characters', {
+                                    language: 'french',
+                                })
+                            }
+                        />
+                    </View>
+
+                    <View style={styles.buttonWrapper}>
+                        <Button
+                            style={styles.button}
+                            title="Log Out"
+                            onPress={() =>
+                                navigation.navigate('Second', { language: 'french' })
+                            }
+                        />
+                    </View>
                 </View>
             </ImageBackground>
         </View>
@@ -62,11 +76,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    buttonWrapper: {
+        margin: 10,
+        width: '50%',
+    },
     button: {
         margin: 10,
+        width: 150,
         padding: 10,
         borderWidth: 2,
         borderColor: 'blue',
         borderRadius: 10,
+        marginBottom: 15,
     },
 });

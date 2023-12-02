@@ -10,32 +10,45 @@ export const Character = ({Data}) => {{
             <Text style={styles.gender}>Gender: {Data.gender}</Text>
             <Text style={styles.status}>Status: {Data.status}</Text>
 
-            {/*// Render bio if one has been written for this character*/}
-            {/*{Data.bio.length > 0 &&*/}
-            {/*    // TODO: Add Bio Information thingy.*/}
-            {/*<Text style={styles.bio}>Bio Information</Text>*/}
-            {/*}*/}
-
         </View>
     );
 }};
 
 const styles = StyleSheet.create({
     View: {
-        flexDirection:'column'
+        flexDirection: 'column',
+        backgroundColor: '#f2f2f2',
+        padding: 20,
     },
     characterImage: {
         width: '100%',
-        aspectRatio: 16/9,
+        aspectRatio: 16 / 9,
         flexShrink: 0,
         flexGrow: 1,
-        height: "auto"
+        height: 'auto',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
     },
     name: {
         fontFamily: 'GetSchwifty',
         color: '#88e23b',
         fontSize: 50,
-        alignSelf: "center",
-
-    }
-})
+        alignSelf: 'center',
+        marginBottom: 10,
+    },
+    details: {
+        fontSize: 16,
+        color: '#333',
+    },
+    detailLine: {
+        marginBottom: 5,
+    },
+    bio: {
+        backgroundColor: '#eee',
+        padding: 10,
+        borderRadius: 5,
+        marginTop: 10,
+    },
+});

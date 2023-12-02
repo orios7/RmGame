@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {View, Image, Button, StyleSheet} from 'react-native';
 
 const QuestionComponent = ({
-
                                imageUri,
                                answerOptions,
                                correctAnswer,

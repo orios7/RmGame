@@ -72,8 +72,13 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
   },
     listItem: {
-      padding: 5,
-        fontWeight: "bold",
+        padding: 10,
+        backgroundColor: '#eee',
+        borderColor: '#ccc',
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 10,
+        fontWeight: 'bold',
         fontSize: 20,
     }
 });
